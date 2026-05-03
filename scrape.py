@@ -77,10 +77,11 @@ def append_to_csv_file(data, file_path):
 
 def clean_html(raw_html):
     """
-    Removes HTML tags from a string.
-    This strips unwanted markup like anchor tags.
+    Converts HTML to plain text while preserving line breaks and paragraph structure.
     """
-    return re.sub('<.*?>', '', raw_html)
+    text = re.sub(r'<br\s*/?>', '\n', raw_html)
+    text = re.sub(r'</p>\s*<p>', '\n\n', text)
+    return re.sub(r'<.*?>', '', text)
 
 def fix_unicode(text):
     """
